@@ -62,7 +62,7 @@ class BananaApi {
     fun createBanana(
             @RequestBody(content = [Content(mediaType = "application/json")])
             banana: CreateBanana): Banana {
-        return Banana(Color.GREEN, 0.5, "iddqd").also {
+        return Banana(Color.valueOf(banana.color), banana.price, "iddqd").also {
             println("banana created: $it")
         }
     }
