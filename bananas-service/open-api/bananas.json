@@ -1,0 +1,138 @@
+{
+  "openapi" : "3.0.1",
+  "info" : {
+    "title" : "OpenAPIDefinition annotation is required only once in a project",
+    "description" : "\n### markdown is supported</br>\n---",
+    "version" : "1"
+  },
+  "paths" : {
+    "/bananas/{id}" : {
+      "get" : {
+        "tags" : [ "bananas" ],
+        "summary" : "get a banana",
+        "description" : "### markdown is supported</br>",
+        "operationId" : "getBanana",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Banana"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Bad Request",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ApiError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/bananas" : {
+      "post" : {
+        "tags" : [ "bananas" ],
+        "summary" : "create a banana",
+        "operationId" : "createBanana",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/CreateBanana"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "204" : {
+            "description" : "OK",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Banana"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Bad Request",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ApiError"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components" : {
+    "schemas" : {
+      "Banana" : {
+        "type" : "object",
+        "properties" : {
+          "color" : {
+            "type" : "string",
+            "enum" : [ "GREEN", "YELLOW", "BROWN" ]
+          },
+          "price" : {
+            "maximum" : 256,
+            "type" : "number",
+            "description" : "price in USD",
+            "format" : "double",
+            "example" : 5
+          },
+          "id" : {
+            "type" : "string",
+            "description" : "UUID",
+            "example" : "29F44D73-B94A-4260-A73D-E6A94A766906"
+          },
+          "nickname" : {
+            "type" : "string",
+            "nullable" : true
+          }
+        }
+      },
+      "ApiError" : {
+        "type" : "object",
+        "properties" : {
+          "error" : {
+            "type" : "string"
+          }
+        }
+      },
+      "CreateBanana" : {
+        "type" : "object",
+        "properties" : {
+          "color" : {
+            "type" : "string"
+          },
+          "price" : {
+            "maximum" : 256,
+            "type" : "number",
+            "description" : "price in USD",
+            "format" : "double",
+            "example" : 5
+          }
+        }
+      }
+    }
+  }
+}

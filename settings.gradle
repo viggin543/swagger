@@ -1,0 +1,3 @@
+
+rootProject.name = 'swagger_example'
+include 'web-server', 'bananas-service', 'java-client-generated'
