@@ -1,0 +1,48 @@
+
+
+
+plugins {
+    id 'org.jetbrains.kotlin.jvm' version '1.3.41'
+    id 'application'
+}
+
+repositories {
+    jcenter()
+}
+
+ext {
+    vertxVersion = '3.8.0'
+}
+
+dependencies {
+
+    compile project(':bananas-service')
+    compile project(':java-client-generated')
+    compile(
+            [group: 'com.fasterxml.jackson.module', name: 'jackson-module-kotlin', version: '2.9.7'],
+            [group: 'org.jetbrains.kotlinx', name: 'kotlinx-coroutines-jdk8', version: '1.0.1'],
+            [group: 'io.vertx', name: 'vertx-lang-kotlin-coroutines', version: "${vertxVersion}"],
+            [group: 'io.vertx', name: 'vertx-lang-kotlin', version: "${vertxVersion}"],
+            [group: 'io.vertx', name: 'vertx-web', version: "${vertxVersion}"])
+
+    implementation platform('org.jetbrains.kotlin:kotlin-bom')
+    testImplementation 'org.jetbrains.kotlin:kotlin-test'
+    testImplementation 'org.jetbrains.kotlin:kotlin-test-junit'
+}
+
+application {
+    mainClassName = 'open_api_java_annotations.AppKt'
+}
+
+compileKotlin {
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+}
+
+compileTestKotlin {
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+}
+

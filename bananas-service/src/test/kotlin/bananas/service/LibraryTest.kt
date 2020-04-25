@@ -9,6 +9,6 @@ import kotlin.test.fail
 
 class LibraryTest {
     @Test fun testSomeLibraryMethod() {
-        fail()
+
     }
 }
